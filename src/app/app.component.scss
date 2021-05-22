@@ -1,0 +1,111 @@
+.container {
+  max-width: 1137px;
+  margin: 0 auto;
+}
+
+.ui.table {
+  font-size: 1rem;
+  width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0.28571429rem;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.87);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ui.celled.table tr td,
+.ui.celled.table tr th {
+  border-left: 1px solid rgba(34, 36, 38, 0.1);
+}
+
+.ui.celled.table tr td:first-child,
+.ui.celled.table tr th:first-child {
+  border-left: none;
+}
+
+.ui.table thead tr:first-child > th:first-child {
+  border-radius: 0.28571429rem 0 0 0;
+}
+
+.ui.table thead th {
+  cursor: auto;
+  background: #f9fafb;
+  text-align: inherit;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0.92857143em 0.78571429em;
+  vertical-align: inherit;
+  font-style: none;
+  font-weight: 700;
+  text-transform: none;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+  border-left: none;
+}
+
+.ui.table td {
+  padding: 0.78571429em 0.78571429em;
+  text-align: inherit;
+}
+
+.ui.table td,
+.ui.table th {
+  -webkit-transition: background 0.1s ease, color 0.1s ease;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.ui.table tr td {
+  border-top: 1px solid rgba(34, 36, 38, 0.1);
+}
+
+.ui.table tr:first-child td {
+  border-top: none;
+}
+
+.ui.table td {
+  padding: 0.78571429em 0.78571429em;
+  text-align: inherit;
+}
+
+.ui.celled.table tr td,
+.ui.celled.table tr th {
+  border-left: 1px solid rgba(34, 36, 38, 0.1);
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.table:not(.unstackable) {
+    width: 100%;
+    padding: 0;
+  }
+
+  .ui.table:not(.unstackable) tr {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    -webkit-box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset !important;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset !important;
+  }
+  .ui.table:not(.unstackable) tr > td,
+  .ui.table:not(.unstackable) tr > th {
+    background: 0 0;
+    border: none !important;
+    padding: 0.25em 0.75em !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  .ui.table:not(.unstackable) td:first-child,
+  .ui.table:not(.unstackable) th:first-child {
+    font-weight: 700;
+  }
+
+  .ui.table:not(.unstackable) tbody,
+  .ui.table:not(.unstackable) tr,
+  .ui.table:not(.unstackable) tr > td,
+  .ui.table:not(.unstackable) tr > th {
+    width: auto !important;
+    display: block !important;
+  }
+}
