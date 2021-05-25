@@ -1,28 +1,24 @@
 <div class="main-container">
   <div class="container">
+    <div class="filter">
+      <input [(ngModel)]="searchQuery" (keyup)="filterData()" type="text" class="form-input"
+        placeholder="filtery by name email city country">
+    </div>
     <table class="ui celled table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Age</th>
-          <th>Job</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>Country</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td data-label="Name">James</td>
-          <td data-label="Age">24</td>
-          <td data-label="Job">Engineer</td>
-        </tr>
-        <tr>
-          <td data-label="Name">Jill</td>
-          <td data-label="Age">26</td>
-          <td data-label="Job">Engineer</td>
-        </tr>
-        <tr>
-          <td data-label="Name">Elyse</td>
-          <td data-label="Age">24</td>
-          <td data-label="Job">Designer</td>
+        <tr *ngFor="let data of filteredData">
+          <td data-label="Name">{{data.name}}</td>
+          <td data-label="Age">{{data.email}}</td>
+          <td data-label="Age">{{data.city}}</td>
+          <td data-label="Job">{{data.country}}</td>
         </tr>
       </tbody>
     </table>

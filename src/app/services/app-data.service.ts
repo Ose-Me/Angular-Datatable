@@ -7,8 +7,9 @@ import { HttpClient } from "@angular/common/http";
 export class AppDataService {
   constructor(private http: HttpClient) {}
 
-  getMovies() {
-    const url = "https://wootlab-moviedb.herokuapp.com/api/movie/list";
+  getData() {
+    const url =
+      "https://60a8e2a620a641001730664e.mockapi.io/api/sysserve_datatable";
     return this.http.get(url).toPromise();
   }
 }
