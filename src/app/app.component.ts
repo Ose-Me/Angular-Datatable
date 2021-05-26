@@ -29,12 +29,13 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {}
 
+  // add infinite scroll functionality
   @HostListener("window:scroll", ["$event"]) onScrollEvent($event) {
     if (
       window.innerHeight + window.pageYOffset >=
       document.body.offsetHeight - 10
     ) {
-      if (this.isLoading) {
+      if (this.isLoading || this.filteredData.length === this.apiData.length) {
         return;
       }
       console.log("bottom");
@@ -65,7 +66,15 @@ export class AppComponent implements OnInit {
           this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v: any) => item.city.toLowerCase().includes(v))
+            .every((v: any) => item.email.toLowerCase().includes(v)) ||
+          this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v: any) => item.city.toLowerCase().includes(v)) ||
+          this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v: any) => item.country.toLowerCase().includes(v))
         );
       });
       this.filteredData = newData;
