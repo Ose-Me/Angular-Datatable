@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { AppDataService } from "./services/app-data.service";
 
 @Component({
@@ -8,7 +8,9 @@ import { AppDataService } from "./services/app-data.service";
 })
 export class AppComponent implements OnInit {
   title = "angular-datable";
+  isLoading: boolean = true;
   apiData: any;
+  infiniteScollData: any;
   filteredData: any;
   searchQuery: string;
 
@@ -17,18 +19,42 @@ export class AppComponent implements OnInit {
       .getData()
       .then((data: any) => {
         this.apiData = data;
-        this.filteredData = data;
-        // this.loading = false;
+        this.filteredData = data.slice(0, 10);
+        this.isLoading = false;
       })
       .catch((error) => {
         console.log(error);
-        // this.loading = false;
+        this.isLoading = false;
       });
   }
   ngOnInit() {}
 
+  @HostListener("window:scroll", ["$event"]) onScrollEvent($event) {
+    if (
+      window.innerHeight + window.pageYOffset >=
+      document.body.offsetHeight - 10
+    ) {
+      if (this.isLoading) {
+        return;
+      }
+      console.log("bottom");
+      this.isLoading = true;
+      setTimeout(() => {
+        let newData = this.apiData.slice(
+          this.filteredData.length - 1,
+          this.filteredData.length + 9
+        );
+
+        this.filteredData = [...this.filteredData, ...newData];
+        console.log(this.filteredData);
+        this.isLoading = false;
+      }, 3000);
+    }
+  }
+
+  // filter data funtion
   filterData() {
-    let newData = this.apiData.slice(0, this.apiData.length);
+    let newData = this.filteredData.slice(0, this.filteredData.length);
     if (this.searchQuery !== "") {
       newData = newData.filter((item) => {
         return (

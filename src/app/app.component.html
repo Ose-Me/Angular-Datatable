@@ -1,8 +1,14 @@
 <div class="main-container">
-  <div class="container">
+  <nav>
+    <div class="container ph-1">
+      Angular Datatable
+    </div>
+  </nav>
+  <div class="container ph-2">
     <div class="filter">
       <input [(ngModel)]="searchQuery" (keyup)="filterData()" type="text" class="form-input"
-        placeholder="filtery by name email city country">
+        placeholder="filter by name email city country">
+
     </div>
     <table class="ui celled table">
       <thead>
@@ -20,6 +26,10 @@
           <td data-label="Age">{{data.city}}</td>
           <td data-label="Job">{{data.country}}</td>
         </tr>
+        <div class="loading" *ngIf="isLoading === true">
+          <div class="loader"></div>
+          loading
+        </div>
       </tbody>
     </table>
   </div>
