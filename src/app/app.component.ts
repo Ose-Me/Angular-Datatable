@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = "angular-datable";
   isLoading: boolean = true;
   apiData: any;
-  infiniteScollData: any;
+  displayData: any;
   filteredData: any;
   searchQuery: string;
 
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
       .getData()
       .then((data: any) => {
         this.apiData = data;
+        this.displayData = data.slice(0, 10);
         this.filteredData = data.slice(0, 10);
         this.isLoading = false;
       })
@@ -38,16 +39,15 @@ export class AppComponent implements OnInit {
       if (this.isLoading || this.filteredData.length === this.apiData.length) {
         return;
       }
-      console.log("bottom");
       this.isLoading = true;
       setTimeout(() => {
         let newData = this.apiData.slice(
-          this.filteredData.length - 1,
-          this.filteredData.length + 9
+          this.displayData.length - 1,
+          this.displayData.length + 9
         );
 
-        this.filteredData = [...this.filteredData, ...newData];
-        console.log(this.filteredData);
+        this.displayData = [...this.displayData, ...newData];
+        this.filteredData = this.displayData;
         this.isLoading = false;
       }, 3000);
     }
@@ -55,33 +55,26 @@ export class AppComponent implements OnInit {
 
   // filter data funtion
   filterData() {
-    let newData = this.filteredData.slice(0, this.filteredData.length);
+    let newData = this.displayData.slice(0, this.displayData.length);
+    let filteredData;
+
     if (this.searchQuery !== "") {
-      newData = newData.filter((item) => {
+      filteredData = newData.filter((item) => {
         return (
-          this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every((v: string) => item.name.toLowerCase().includes(v)) ||
-          this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every((v: any) => item.email.toLowerCase().includes(v)) ||
-          this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every((v: any) => item.city.toLowerCase().includes(v)) ||
-          this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every((v: any) => item.country.toLowerCase().includes(v))
+          item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          item.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          item.city.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          item.country.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });
-      this.filteredData = newData;
+      console.log(this.filteredData);
     }
 
     if (this.searchQuery == "") {
-      this.filteredData = this.apiData;
+      filteredData = newData;
     }
+
+    this.filteredData = filteredData;
+    console.log(this.filteredData, "here");
   }
 }
