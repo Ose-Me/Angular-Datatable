@@ -1,36 +1,40 @@
 <div class="main-container">
   <nav>
-    <div class="container ph-1">
-      Angular Datatable
+    <div class="container">
+      <h1> Angular Datatable</h1>
+
+      <div class="filter">
+        <input [(ngModel)]="searchQuery" (keyup)="filterData()" type="text" class="form-input"
+          placeholder="filter by name email city country">
+
+      </div>
     </div>
   </nav>
-  <div class="container ph-2">
-    <div class="filter">
-      <input [(ngModel)]="searchQuery" (keyup)="filterData()" type="text" class="form-input"
-        placeholder="filter by name email city country">
+  <div class="main-content">
+    <div class="container">
 
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filteredData">
+            <td data-label="Name">{{data.name}}</td>
+            <td data-label="Age">{{data.email}}</td>
+            <td data-label="Age">{{data.city}}</td>
+            <td data-label="Job">{{data.country}}</td>
+          </tr>
+          <div class="loading" *ngIf="isLoading === true">
+            <div class="loader"></div>
+            loading
+          </div>
+        </tbody>
+      </table>
     </div>
-    <table class="ui celled table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>City</th>
-          <th>Country</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of filteredData">
-          <td data-label="Name">{{data.name}}</td>
-          <td data-label="Age">{{data.email}}</td>
-          <td data-label="Age">{{data.city}}</td>
-          <td data-label="Job">{{data.country}}</td>
-        </tr>
-        <div class="loading" *ngIf="isLoading === true">
-          <div class="loader"></div>
-          loading
-        </div>
-      </tbody>
-    </table>
   </div>
 </div>
